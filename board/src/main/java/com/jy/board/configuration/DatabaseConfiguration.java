@@ -50,7 +50,7 @@ public class DatabaseConfiguration {
 		sessionFactoryBean.setDataSource(dataSource);	// Data Source 객체를 등록
 		// Mapper 파일 위치 지정
 		sessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/sql-*.xml"));
-		
+		sessionFactoryBean.setConfiguration(mybatisConfig());	// mybatis 설정을 적용
 		return sessionFactoryBean.getObject();
 	}
 	
@@ -62,8 +62,19 @@ public class DatabaseConfiguration {
 	@Bean
 	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sessionFactory) {
 		return new SqlSessionTemplate(sessionFactory);
-				
 	}
+	
+	
+	/**
+	 * 접두사가 mybatis.configuration인 설정을 가져와서 자바 객체로 만든 후 빈으로 등록
+	 * @return mybatis Configuration 객체
+	 */
+	@Bean
+	@ConfigurationProperties(prefix = "mybatis.configuration")
+	public org.apache.ibatis.session.Configuration mybatisConfig() {
+		return new org.apache.ibatis.session.Configuration();
+	}
+	
 	
 	
 }
