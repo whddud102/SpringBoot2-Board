@@ -8,4 +8,6 @@ public interface BoardService {
 	public List<BoardDto> selectBoardList();
 
 	public void insertBoard(BoardDto board);
+
+	public BoardDto selectBoardDetail(int idx);
 }
