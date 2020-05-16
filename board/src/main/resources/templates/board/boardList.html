@@ -25,11 +25,13 @@
 			</thead>
 			
 			<tbody>
-				<tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
-					<td th:text="${list.boardIdx}"></td>
-					<td class="title" th:text="${list.title}"></td>
-					<td th:text="${list.hitCnt}"></td>
-					<td th:text="${#temporals.format(list.createdDateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+				<tr th:if="${#lists.size(list)} > 0" th:each="board : ${list}">
+					<td th:text="${board.boardIdx}"></td>
+					<td class="title">
+						<a th:href="'/board/boardDetail?idx=' + ${board.boardIdx}" th:text="${board.title}"></a>
+					</td>
+					<td th:text="${board.hitCnt}"></td>
+					<td th:text="${#temporals.format(board.createdDateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
 				</tr>
 				
 				<tr th:unless="${#lists.size(list)} > 0">

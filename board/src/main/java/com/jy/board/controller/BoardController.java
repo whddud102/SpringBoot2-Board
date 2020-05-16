@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jy.board.dto.BoardDto;
 import com.jy.board.service.BoardService;
@@ -38,6 +39,14 @@ public class BoardController {
 	{
 		boardService.insertBoard(board);
 		return "redirect:/board/boardList";
+	}
+	
+	
+	@GetMapping("/boardDetail")
+	public void boardDetail(Model model, @RequestParam("idx") int idx) {
+		BoardDto board =  boardService.selectBoardDetail(idx);
+		
+		model.addAttribute("board", board);
 	}
 	
 	
