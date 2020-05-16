@@ -27,4 +27,10 @@ public class BoardController {
 		List<BoardDto> list = boardService.selectBoardList();
 		model.addAttribute("list", list);
 	}
+	
+	@GetMapping("/boardWrite")
+	public void openBoardWrite() {
+	}
+	
+	
 }
