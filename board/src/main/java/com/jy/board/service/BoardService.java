@@ -10,4 +10,8 @@ public interface BoardService {
 	public void insertBoard(BoardDto board);
 
 	public BoardDto selectBoardDetail(int idx);
+
+	public void updateBoard(BoardDto board);
+
+	public void deleteBoard(int idx);
 }
