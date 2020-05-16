@@ -32,6 +32,7 @@ public class BoardController {
 	
 	@GetMapping("/boardWrite")
 	public void openBoardWrite() {
+		log.info("게시글 작성 페이지 요청");
 	}
 	
 	@PostMapping("/insertBoard") 
@@ -48,6 +49,22 @@ public class BoardController {
 		
 		model.addAttribute("board", board);
 	}
+	
+	@PostMapping("/updateBoard")
+	public String updateBoard(BoardDto board) {
+		boardService.updateBoard(board);
+		
+		return "redirect:/board/boardList";
+	}
+	
+	@PostMapping("/deleteBoard")
+	public String deleteBoard(@RequestParam("boardIdx") int idx) {
+		boardService.deleteBoard(idx);
+		
+		return "redirect:/board/boardList";
+		
+	}
+	
 	
 	
 }
