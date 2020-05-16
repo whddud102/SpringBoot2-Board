@@ -8,5 +8,7 @@ import com.jy.board.dto.BoardDto;
 
 @Mapper
 public interface BoardMapper {
-	List<BoardDto> selectBoardList();
+	public List<BoardDto> selectBoardList();
+
+	public void insertBoard(BoardDto board);
 }

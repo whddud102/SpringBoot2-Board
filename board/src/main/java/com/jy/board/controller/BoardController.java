@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jy.board.dto.BoardDto;
@@ -30,6 +31,13 @@ public class BoardController {
 	
 	@GetMapping("/boardWrite")
 	public void openBoardWrite() {
+	}
+	
+	@PostMapping("/insertBoard") 
+	public String insertBoard(BoardDto board)
+	{
+		boardService.insertBoard(board);
+		return "redirect:/board/boardList";
 	}
 	
 	
