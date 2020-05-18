@@ -17,7 +17,7 @@
 		]]>
 	</select>
 	
-	<insert id="insertBoard">
+	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="boardIdx">
 		<![CDATA[
 			INSERT INTO t_board
 			(
@@ -85,4 +85,25 @@
 			WHERE
 				board_idx = #{boardIdx}
 	</update>
+	
+	<insert id="insertAttachFileList" parameterType="com.jy.board.dto.AttachFileDto">
+		<![CDATA[
+			INSERT INTO t_board 
+			(
+				board_idx, original_file_name, stored_file_path, file_size, creator_id, created_datetime
+			)
+			VALUES
+		]]>
+		
+		<foreach collection="list" item="item" separator=",">
+			(
+				#{item.boardIdx},			
+				#{item.originalFileName},
+				#{item.storedFilePath},
+				#{item.fileSize},
+				'admin',
+				NOW()
+			)
+		</foreach>
+	</insert>
 </mapper>

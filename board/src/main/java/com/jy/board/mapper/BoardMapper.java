@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.jy.board.dto.AttachFileDto;
 import com.jy.board.dto.BoardDto;
 
 @Mapper
@@ -19,4 +20,6 @@ public interface BoardMapper {
 	public void updateBoard(BoardDto board);
 
 	public void deleteBoard(int idx);
+
+	public void insertAttachFileList(List<AttachFileDto> list);
 }
