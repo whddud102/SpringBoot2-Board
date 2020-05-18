@@ -1,16 +1,26 @@
 package com.jy.board.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jy.board.dto.AttachFileDto;
 import com.jy.board.dto.BoardDto;
 import com.jy.board.service.BoardService;
 
@@ -70,6 +80,25 @@ public class BoardController {
 		
 		return "redirect:/board/boardList";
 		
+	}
+	
+	@GetMapping(value = "/downloadFile", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public ResponseEntity<Resource> downloadFile(int idx) {
+		AttachFileDto attachFileDto = boardService.selectAttachFileInfo(idx);
+		String fileName = attachFileDto.getOriginalFileName();
+		
+		File file = new File(attachFileDto.getStoredFilePath());
+		Resource resource = new FileSystemResource(file);
+		
+		HttpHeaders headers = new HttpHeaders();
+		try {
+			headers.add("Content-Disposition", "attachment; filename=\"" + URLEncoder.encode(fileName, "UTF-8") + "\";");
+			
+		} catch (Exception e) {
+		}
+		
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 	
 	
