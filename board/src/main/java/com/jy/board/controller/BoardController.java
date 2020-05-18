@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jy.board.dto.BoardDto;
 import com.jy.board.service.BoardService;
@@ -35,10 +36,16 @@ public class BoardController {
 		log.info("게시글 작성 페이지 요청");
 	}
 	
+	/**
+	 * 파일 업로드 요청을 파라미터로 전달 받도록 수정
+	 * @param board 게시글 객체
+	 * @param multipartHttpServletRequest 파일 업로드 요청 객체
+	 * @return 게시글 목록 화면으로 리다이렉트
+	 */
 	@PostMapping("/insertBoard") 
-	public String insertBoard(BoardDto board)
+	public String insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest)
 	{
-		boardService.insertBoard(board);
+		boardService.insertBoard(board, multipartHttpServletRequest);
 		return "redirect:/board/boardList";
 	}
 	
