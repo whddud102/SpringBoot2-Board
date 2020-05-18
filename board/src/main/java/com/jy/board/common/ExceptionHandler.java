@@ -1,5 +1,6 @@
 package com.jy.board.common;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 public class ExceptionHandler {
 	
 	@org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
-	public String defaultExceptionHandler(Exception exception) {
+	public String defaultExceptionHandler(Exception exception, Model model) {
 		log.info("예외 발생 : " + exception);
-		return "/error/error_default";
+		
+		model.addAttribute("exception", exception);
+		return "error/error_default";
 	}
 }
