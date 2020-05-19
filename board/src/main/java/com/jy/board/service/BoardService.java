@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.jy.board.dto.AttachFileDto;
 import com.jy.board.dto.BoardDto;
 
 public interface BoardService {
@@ -17,4 +18,6 @@ public interface BoardService {
 	public void updateBoard(BoardDto board);
 
 	public void deleteBoard(int idx);
+	
+	public AttachFileDto selectAttachFileInfo(int idx);
 }

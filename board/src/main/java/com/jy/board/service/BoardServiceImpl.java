@@ -51,8 +51,13 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public BoardDto selectBoardDetail(int idx) {
+		BoardDto board = boardMapper.selectBoardDetail(idx);
+		List<AttachFileDto> list = boardMapper.selectAttachFileList(idx);
+		board.setFileList(list);
+		
 		boardMapper.updateHitCount(idx);
-		return boardMapper.selectBoardDetail(idx);
+		
+		return board;
 	}
 
 	@Override
@@ -63,6 +68,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void deleteBoard(int idx) {
 		boardMapper.deleteBoard(idx);
+	}
+
+	@Override
+	public AttachFileDto selectAttachFileInfo(int idx) {
+		return boardMapper.selectAttachFileInfo(idx);
 	}
 
 
