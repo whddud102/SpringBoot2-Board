@@ -22,4 +22,8 @@ public interface BoardMapper {
 	public void deleteBoard(int idx);
 
 	public void insertAttachFileList(List<AttachFileDto> list);
+	
+	public List<AttachFileDto> selectAttachFileList(int boardIdx);
+	
+	public AttachFileDto selectAttachFileInfo(int idx);
 }
