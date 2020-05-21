@@ -22,6 +22,7 @@
 - JPA
 - Thymeleaf
 - Jquery
+- MySQL
 
 ### 개발 기간
 - 05.15 ~ 05.21
