@@ -1,15 +1,29 @@
 spring :
    datasource :
       hikari :
-         driver-class-name : com.mysql.cj.jdbc.Driver
          jdbc-url : jdbc:mysql://localhost:3306/insight?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
          username : root
          password : 1234
          connection-test-query : "SELECT 1"
+         
+   jpa :
+      database : mysql     # 사용할 DB 지정
+      database-platform : org.hibernate.dialect.MySQL5InnoDBDialect           # 사용할 DB 엔진 지정
+      generate-ddl : true   # 테이블 자동 생성 여부
+      
+      hibernate : 
+         # 새로운 ID 생성 옵션
+         # MySQL의 자동 증가(Auto Increment) 속성을 사용하기 떄문에 false로 설정
+         use-new-id-generator-mappings : false 
+         
+      
+      
 mybatis :
    configuration :
       map-underscore-to-camel-case : true
  
 logging : 
    level :
-       web : INFO
+       web : DEBUG
+       
+ 
