@@ -47,7 +47,7 @@
 			
 		<div class="file_list">
 			<a th:each="attachFile : ${board.fileList}"
-				th:href="@{/jpa/boards/file(idx=${attachFile.idx}, boardIdx=${attachFile.boardIdx})}" 
+				th:href="@{/jpa/boards/file(idx=${attachFile.idx}, boardIdx=${board.boardIdx})}" 
 				th:text="|${attachFile.originalFileName} (${#numbers.formatInteger(attachFile.fileSize/100, 1, 'DEFAULT')} kb)|"></a>
 		</div>
 		

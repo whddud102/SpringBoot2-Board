@@ -13,7 +13,7 @@ public interface JpaBoardRepository extends CrudRepository<BoardEntity, Integer>
 	List<BoardEntity> findAllByOrderByBoardIdxDesc();
 	
 	// 첨부파일 정보를 가져오는 쿼리는 @Query 어노테이션을 이용해서 직접 작성
-	@Query("SELECT file FROM AttachFileEntity file  WHERE board_idx = :boardIdx AND idx = :idx")
+	@Query("SELECT file FROM AttachFileEntity file  WHERE board_idx = ?1 AND idx = ?2")
 	AttachFileEntity findAttachFile(@Param("boardIdx") int boardIdx, @Param("idx") int idx);
 	
 	
